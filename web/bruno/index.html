@@ -1,0 +1,155 @@
+<title>Bruno Torcoletti</title>
+<meta name="description" content="Bruno Torcoletti · Desarrollo web · De Aquí y Allá">
+<meta property="og:title" content="Bruno Torcoletti">
+<meta property="og:description" content="Desarrollo web · De Aquí y Allá">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;700&family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: una tarjeta vertical, nombre grande, dos relojes (Mallorca / Argentina) como firma, botones apilados */
+:root {
+  --bg: #eef3f4;
+  --card: #ffffff;
+  --fg: #12222a;
+  --muted: #5b6d75;
+  --line: #d6e1e4;
+  --sea: #0d6680;
+  --sea-ink: #ffffff;
+  --sun: #c7792a;
+  --font-display: "Familjen Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0b1418; --card: #13232a; --fg: #e8f0f2; --muted: #93a7ae; --line: #22343b;
+    --sea: #3fb0cf; --sea-ink: #06151a; --sun: #e9a45c; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0b1418; --card: #13232a; --fg: #e8f0f2; --muted: #93a7ae; --line: #22343b;
+  --sea: #3fb0cf; --sea-ink: #06151a; --sun: #e9a45c; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--fg);
+  font-family: var(--font-body); font-size: 16px; line-height: 1.5;
+  padding-inline: 16px; padding-block: 40px 32px;
+  min-height: 100%;
+}
+.wrap { max-width: 420px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px; }
+
+.mono-badge {
+  width: 72px; height: 72px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: var(--sea); color: var(--sea-ink);
+  font-family: var(--font-display); font-weight: 700; font-size: 28px; letter-spacing: 0.02em;
+}
+header { display: flex; flex-direction: column; gap: 14px; }
+h1 {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: clamp(2.4rem, 11vw, 3.2rem); line-height: 0.95; letter-spacing: -0.02em;
+  margin: 0; text-wrap: balance;
+}
+.role { margin: 0; color: var(--muted); font-size: 1.05rem; }
+.role strong { color: var(--fg); font-weight: 600; }
+
+.clocks {
+  display: grid; grid-template-columns: 1fr 1fr;
+  border-block: 1px solid var(--line);
+}
+.clock { padding-block: 14px; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.clock + .clock { border-left: 1px solid var(--line); padding-left: 16px; }
+.clock span {
+  font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted);
+}
+.clock time {
+  font-family: var(--font-mono); font-size: 1.5rem; font-variant-numeric: tabular-nums;
+}
+.clock:first-child time { color: var(--sea); }
+.clock:last-child time { color: var(--sun); }
+
+.links { display: flex; flex-direction: column; gap: 10px; }
+.btn {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 16px 18px; border-radius: 14px;
+  border: 1px solid var(--line); background: var(--card);
+  color: var(--fg); text-decoration: none; font-weight: 600; font-size: 1.02rem;
+  font-family: inherit; cursor: pointer; width: 100%; text-align: left;
+  transition: border-color .15s, transform .15s;
+}
+.btn small { font-weight: 400; color: var(--muted); font-size: 0.9rem; }
+.btn:hover { border-color: var(--sea); }
+.btn:active { transform: scale(0.985); }
+.btn:focus-visible { outline: 2px solid var(--sea); outline-offset: 2px; }
+.btn.primary { background: var(--sea); color: var(--sea-ink); border-color: var(--sea); }
+.btn.primary small { color: inherit; opacity: 0.8; }
+.btn svg { flex: none; width: 18px; height: 18px; }
+
+footer { color: var(--muted); font-size: 0.85rem; }
+footer a { color: inherit; }
+@media (prefers-reduced-motion: reduce) { .btn { transition: none; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="mono-badge" aria-hidden="true">BT</div>
+    <h1>Bruno Torcoletti</h1>
+    <p class="role">Desarrollador web y cofundador de <strong>De Aquí y Allá</strong>, estudio de diseño y desarrollo entre España y Argentina.</p>
+  </header>
+
+  <div class="clocks" aria-label="Hora local">
+    <div class="clock"><span>Mallorca</span><time id="t-mallorca">--:--</time></div>
+    <div class="clock"><span>Argentina</span><time id="t-argentina">--:--</time></div>
+  </div>
+
+  <nav class="links">
+    <a class="btn primary" href="https://instagram.com/brunotorcoletti" target="_blank" rel="noopener">
+      Instagram <small>@brunotorcoletti</small>
+    </a>
+    <a class="btn" href="https://deaquiyalla.com" target="_blank" rel="noopener">
+      Web del estudio <small>deaquiyalla.com</small>
+    </a>
+    <button class="btn" id="save-contact" type="button">
+      Guardar contacto
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v12M6 10l6 6 6-6M5 20h14"/></svg>
+    </button>
+  </nav>
+
+  <footer>Mallorca · Argentina</footer>
+</div>
+
+<script>
+(function () {
+  function fmt(tz) {
+    return new Intl.DateTimeFormat("es-ES", { hour: "2-digit", minute: "2-digit", timeZone: tz }).format(new Date());
+  }
+  function tick() {
+    document.getElementById("t-mallorca").textContent = fmt("Europe/Madrid");
+    document.getElementById("t-argentina").textContent = fmt("America/Argentina/Buenos_Aires");
+  }
+  tick();
+  setInterval(tick, 15000);
+
+  var vcard = [
+    "BEGIN:VCARD", "VERSION:3.0",
+    "N:Torcoletti;Bruno;;;", "FN:Bruno Torcoletti",
+    "ORG:De Aquí y Allá", "TITLE:Desarrollador web",
+    "URL:https://deaquiyalla.com",
+    "X-SOCIALPROFILE;TYPE=instagram:https://instagram.com/brunotorcoletti",
+    "NOTE:Instagram @brunotorcoletti",
+    "END:VCARD"
+  ].join("\r\n");
+
+  document.getElementById("save-contact").addEventListener("click", function () {
+    var blob = new Blob([vcard], { type: "text/vcard;charset=utf-8" });
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "bruno-torcoletti.vcf";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  });
+})();
+</script>
